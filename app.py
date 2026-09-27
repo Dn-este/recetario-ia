@@ -14,9 +14,14 @@ init_db()
 st.title("🍳 Extractor de Recetas IA")
 
 api_key = os.getenv("GEMINI_API_KEY")
+try:
+    if not api_key:
+        api_key = st.secrets["GEMINI_API_KEY"]
+except:
+    pass
 
 if not api_key or api_key == "tu_clave_aqui_reemplazar":
-    st.warning("⚠️ Configura tu GEMINI_API_KEY en el archivo .env")
+    st.warning("⚠️ Configura tu GEMINI_API_KEY en el panel de Secrets (Streamlit) o archivo .env")
     st.stop()
 
 tab_nueva, tab_lista = st.tabs(["Extraer Receta", "Mis Recetas"])
