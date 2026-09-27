@@ -10,7 +10,8 @@ def descargar_video(url: str, output_path="downloads/video.mp4") -> str:
         if "youtube.com" in url.lower() or "youtu.be" in url.lower():
             from pytubefix import YouTube
             
-            yt = YouTube(url)
+            # Intentar evadir el bot-block de servidores usando cliente diferente
+            yt = YouTube(url, client='ANDROID')
             
             # Los Shorts de YouTube no tienen streams combinados. Bajamos por separado.
             v_stream = yt.streams.filter(type="video", file_extension="mp4").order_by("resolution").desc().first()
